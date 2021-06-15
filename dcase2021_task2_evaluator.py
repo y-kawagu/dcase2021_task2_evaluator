@@ -25,7 +25,6 @@ GROUND_TRUTH_DATA_DIR = "./ground_truth_data"
 
 # variables that do not change
 DOMAINS = ["source_test", "target_test"]
-DECISION_THRESHOLD = 0.9
 MAX_FPR = 0.1
 SCORE_COL = 1
 
@@ -109,8 +108,8 @@ def output_result(target_dir, machines, section_ids):
 
                 # calc result
                 print("\n================= START OF EVALUATION FOR A SECTION ==================\n")
-                auc =metrics.roc_auc_score(y_true, y_pred)
-                p_auc =metrics.roc_auc_score(y_true, y_pred, max_fpr=MAX_FPR)
+                auc = metrics.roc_auc_score(y_true, y_pred)
+                p_auc = metrics.roc_auc_score(y_true, y_pred, max_fpr=MAX_FPR)
                 tn, fp, fn, tp = metrics.confusion_matrix(y_true, decision_result_data).ravel()
                 prec = tp / numpy.maximum(tp + fp, sys.float_info.epsilon)
                 recall = tp / numpy.maximum(tp + fn, sys.float_info.epsilon)
@@ -161,9 +160,9 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     for idx, team_dir in enumerate(team_dirs):
-        print("[{idx}/{total}] team name :{team_dir}".format(team_dir=os.path.basename(team_dir),
-                                                             idx=idx+1,
-                                                             total=len(team_dirs)))
+        print("[{idx}/{total}] team name : {team_dir}".format(team_dir=os.path.basename(team_dir),
+                                                              idx=idx+1,
+                                                              total=len(team_dirs)))
         if os.path.isdir(team_dir):
             normal_end_flag = output_result(team_dir, machine_types, section_ids)
             if normal_end_flag == -1:
