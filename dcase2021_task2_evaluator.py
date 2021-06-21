@@ -138,6 +138,10 @@ def output_result(target_dir, machines, section_ids):
     csv_lines.append(["harmonic mean over all machine types, sections, and domains", ""] + list(hmean_performance))
     csv_lines.append([])
 
+    official_score = scipy.stats.hmean(numpy.maximum(numpy.array(performance_over_all, dtype=float)[:, 0 : 2], sys.float_info.epsilon), axis=None)
+    csv_lines.append(["official score", "", str(official_score)])
+    csv_lines.append([])
+
     # output results
     os.makedirs(RESULT_DIR, exist_ok=True)
     result_file_path = "{result_dir}/{target_dir}_result.csv".format(result_dir=RESULT_DIR,
