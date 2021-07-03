@@ -69,6 +69,7 @@ def output_result(target_dir, machines, section_ids):
     print(target_dir)
     csv_lines = []
     performance_over_all = []
+    src_perf_over_all, targ_perf_over_all = [], []
     for machine_idx, target_machine in enumerate(machines):
         print("[{idx}/{total}] machine type : {target_machine}".format(target_machine=target_machine,
                                                                        idx=machine_idx+1,
@@ -117,6 +118,10 @@ def output_result(target_dir, machines, section_ids):
                 csv_lines.append([section_id.split("_", 1)[1], domain.split("_", 1)[0], auc, p_auc, prec, recall, f1])
                 performance.append([auc, p_auc, prec, recall, f1])
                 performance_over_all.append([auc, p_auc, prec, recall, f1])
+                if domain == 'source_test':
+                    src_perf_over_all.append([auc, p_auc, prec, recall, f1])
+                else:
+                    targ_perf_over_all.append([auc, p_auc, prec, recall, f1])
                 print("AUC : {}".format(auc))
                 print("pAUC : {}".format(p_auc))
                 print("precision : {}".format(prec))
@@ -128,6 +133,10 @@ def output_result(target_dir, machines, section_ids):
         csv_lines.append(["arithmetic mean", ""] + list(amean_performance))
         hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(performance, dtype=float), sys.float_info.epsilon), axis=0)
         csv_lines.append(["harmonic mean", ""] + list(hmean_performance))
+        hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(performance[:len(machines)//2], dtype=float), sys.float_info.epsilon), axis=0)
+        csv_lines.append(["source harmonic mean", ""] + list(hmean_performance))
+        hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(performance[len(machines)//2:], dtype=float), sys.float_info.epsilon), axis=0)
+        csv_lines.append(["target harmonic mean", ""] + list(hmean_performance))
         csv_lines.append([])
 
     csv_lines.append(["", "", "AUC", "pAUC", "precision", "recall", "F1 score"])
@@ -136,6 +145,10 @@ def output_result(target_dir, machines, section_ids):
     csv_lines.append(["arithmetic mean over all machine types, sections, and domains", ""] + list(amean_performance))
     hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(performance_over_all, dtype=float), sys.float_info.epsilon), axis=0)
     csv_lines.append(["harmonic mean over all machine types, sections, and domains", ""] + list(hmean_performance))
+    hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(src_perf_over_all, dtype=float), sys.float_info.epsilon), axis=0)
+    csv_lines.append(["source harmonic mean over all machine types, sections, and domains", ""] + list(hmean_performance))
+    hmean_performance = scipy.stats.hmean(numpy.maximum(numpy.array(targ_perf_over_all, dtype=float), sys.float_info.epsilon), axis=0)
+    csv_lines.append(["target harmonic mean over all machine types, sections, and domains", ""] + list(hmean_performance))
     csv_lines.append([])
 
     official_score = scipy.stats.hmean(numpy.maximum(numpy.array(performance_over_all, dtype=float)[:, 0 : 2], sys.float_info.epsilon), axis=None)
