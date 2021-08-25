@@ -18,7 +18,8 @@ Clone this repository from Github.
 
 ### 2. Prepare data
 - Ground truth
-    - Download the ground truth included in this repository (the directory `ground_truth_data`)
+    - Download the ground truth included in [this repository](https://zenodo.org/record/5257674)
+    - Copy the ground truth data into the directory `./ground_truth_data`.
 - Anomaly scores
     - Generate csv files `anomaly_score_<machine_type>_section_<section_index>_<domain>_test.csv` and `decision_result_<machine_type>_section_<section_index>_<domain>_test.csv` by using a system for the [evaluation dataset](https://zenodo.org/record/4884786). (The format information is described [here](http://dcase.community/challenge2021/task-unsupervised-detection-of-anomalous-sounds#submission).) 
 - Rename the directory containing the csv files to a team name
