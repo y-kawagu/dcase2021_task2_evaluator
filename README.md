@@ -101,7 +101,7 @@ harmonic mean,,0.6430137021761633,0.5374559270729756,0.6109851844715204,0.410946
 "harmonic mean over all machine types, sections, and domains",,0.5776591410233997,0.527685553045072,0.5382056230057072,0.22529948927941607,0.31763363477051193
 ```
 
-## 7. Citation
+### 7. Citation
 If you use this system, please cite all the following three papers:
 - Yohei Kawaguchi, Keisuke Imoto, Yuma Koizumi, Noboru Harada, Daisuke Niizumi, Kota Dohi, Ryo Tanabe, Harsh Purohit, and Takashi Endo, "Description and Discussion on DCASE 2021 Challenge Task 2: Unsupervised Anomalous Sound Detection for Machine Condition Monitoring under Domain Shifted Conditions," in arXiv e-prints: 2106.04492, 2021. [URL](https://arxiv.org/abs/2106.04492)
 - Noboru Harada, Daisuke Niizumi, Daiki Takeuchi, Yasunori Ohishi, Masahiro Yasuda, Shoichiro Saito, "ToyADMOS2: Another Dataset of Miniature-Machine Operating Sounds for Anomalous Sound Detection under Domain Shift Conditions," in arXiv e-prints: 2106.02369, 2021. [URL](https://arxiv.org/abs/2106.02369)
